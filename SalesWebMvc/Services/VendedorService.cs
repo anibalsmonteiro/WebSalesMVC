@@ -21,5 +21,12 @@ namespace SalesWebMvc.Services
             return _context.Vendedor.ToList();
         }
 
+        public void Incluir(Vendedor vendedor)
+        {
+            _context.Add(vendedor);
+            _context.SaveChanges();
+
+        }
+
     }
 }
