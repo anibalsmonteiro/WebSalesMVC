@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace SalesWebMvc.Models
 {
@@ -9,5 +8,24 @@ namespace SalesWebMvc.Models
     {
         public int Id { get; set; }
         public string Nome { get; set; }
+        public ICollection<Vendedor> Vendedores { get; set; } = new List<Vendedor>();
+
+        public Departamento() { }
+
+        public Departamento(int id, string nome)
+        {
+            Id = id;
+            Nome = nome;
+        }
+
+        public void AdicionaVendedor(Vendedor vendedor)
+        {
+            Vendedores.Add(vendedor);
+        }
+
+        public double PegaValorTotalDasVendas(DateTime inicial, DateTime final)
+        {
+            return (from v in Vendedores select v.PegaValorTotalDasVendas(inicial, final)).Sum();
+        }
     }
 }
